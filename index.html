@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>index</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-1861bbae5b71fe29aff8c5472363b160.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#centrality" id="toc-centrality" class="nav-link" data-scroll-target="#centrality">Centrality</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-my-work-environment" id="toc-setting-up-my-work-environment" class="nav-link" data-scroll-target="#setting-up-my-work-environment">Setting up my work environment</a></li>
+  <li><a href="#loading-the-cycling-network-data-using-sf" id="toc-loading-the-cycling-network-data-using-sf" class="nav-link" data-scroll-target="#loading-the-cycling-network-data-using-sf">Loading the cycling network data using <code>sf</code></a></li>
+  <li><a href="#converting-the-data-into-an-undirected-network-using-sfnetworks" id="toc-converting-the-data-into-an-undirected-network-using-sfnetworks" class="nav-link" data-scroll-target="#converting-the-data-into-an-undirected-network-using-sfnetworks">Converting the data into an undirected network using <code>sfnetworks</code></a></li>
+  <li><a href="#calculating-different-measures-of-centrality" id="toc-calculating-different-measures-of-centrality" class="nav-link" data-scroll-target="#calculating-different-measures-of-centrality">Calculating different measures of centrality</a></li>
+  <li><a href="#converting-back-to-sf-objects" id="toc-converting-back-to-sf-objects" class="nav-link" data-scroll-target="#converting-back-to-sf-objects">Converting back to <code>sf</code> objects</a></li>
+  <li><a href="#assign-the-values-to-the-edges" id="toc-assign-the-values-to-the-edges" class="nav-link" data-scroll-target="#assign-the-values-to-the-edges">Assign the values to the edges</a></li>
+  <li><a href="#plot-the-maps" id="toc-plot-the-maps" class="nav-link" data-scroll-target="#plot-the-maps">Plot the maps</a></li>
+  <li><a href="#discussion-of-results" id="toc-discussion-of-results" class="nav-link" data-scroll-target="#discussion-of-results">Discussion of results</a></li>
+  </ul></li>
+  <li><a href="#routing" id="toc-routing" class="nav-link" data-scroll-target="#routing">Routing</a>
+  <ul class="collapse">
+  <li><a href="#prepare-the-data" id="toc-prepare-the-data" class="nav-link" data-scroll-target="#prepare-the-data">Prepare the data</a></li>
+  <li><a href="#defining-origin-and-destinations" id="toc-defining-origin-and-destinations" class="nav-link" data-scroll-target="#defining-origin-and-destinations">Defining origin and destinations</a></li>
+  <li><a href="#computing-the-shortest-paths" id="toc-computing-the-shortest-paths" class="nav-link" data-scroll-target="#computing-the-shortest-paths">Computing the shortest paths</a></li>
+  <li><a href="#build-edge-path-structure" id="toc-build-edge-path-structure" class="nav-link" data-scroll-target="#build-edge-path-structure">Build edge-path structure</a></li>
+  <li><a href="#visualise-routing-results" id="toc-visualise-routing-results" class="nav-link" data-scroll-target="#visualise-routing-results">Visualise routing results</a></li>
+  </ul></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+<img src="images/logo.png" style="width: 250px; margin-right: 20px;">
+<h1 style="margin: 0;">
+Solution for Network Analysis
+</h1>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this file I am going to present my solutions for the Network Analysis exercise.</p>
+<section id="centrality" class="level2">
+<h2 class="anchored" data-anchor-id="centrality">Centrality</h2>
+<p>In this task, I will analyze the cycle network of Switzerland using R. The dataset comes from the Federal Roads Office FEDRO (ASTRA).</p>
+<p>The goal is to compute different centrality measures (degree, betweenness and closeness) for the nodes in the network and to visualize the results. To do this, I will follow these steps:</p>
+<section id="setting-up-my-work-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-my-work-environment">Setting up my work environment</h3>
+<p>In this step, I loaded all the necessary libraries for spatial analysis, network construction, data manipulation, and plotting. I also defined a consistent file path to my geodata folder so I could easily access the dataset throughout the project. This setup ensures that all required tools and data locations are ready before starting the analysis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sfnetworks)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygraph)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set path to geodata</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">GEODATA =</span> <span class="st">"/home/rhoumyas/data/geodata"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the file path</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>gpkg_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">Sys.getenv</span>(<span class="st">"GEODATA"</span>), <span class="st">"veloland.gpkg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="loading-the-cycling-network-data-using-sf" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-cycling-network-data-using-sf">Loading the cycling network data using <code>sf</code></h3>
+<p>Here, I imported the cycling network data from the GeoPackage file using <code>st_read()</code>. This step brings the raw spatial data into R as an sf object.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the .gpkg file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>veloland   <span class="ot">&lt;-</span> <span class="fu">st_read</span>(gpkg_path, <span class="at">drivers =</span> <span class="st">'GPKG'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>options:        GPKG 
+Reading layer `veloland' from data source 
+  `/home/rhoumyas/data/geodata/veloland.gpkg' using driver `GPKG'
+Simple feature collection with 2066 features and 1 field
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: 2485756 ymin: 1076723 xmax: 2837853 ymax: 1297683
+Projected CRS: CH1903+ / LV95</code></pre>
+</div>
+</div>
+</section>
+<section id="converting-the-data-into-an-undirected-network-using-sfnetworks" class="level3">
+<h3 class="anchored" data-anchor-id="converting-the-data-into-an-undirected-network-using-sfnetworks">Converting the data into an undirected network using <code>sfnetworks</code></h3>
+<p>In this step, I transformed the spatial dataset into a network object using <code>as_sfnetwork()</code>. This converts the line geometries into a graph structure where intersections and connections can be analysed. I set the network to be undirected because cycling routes allow movement in both directions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the network </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>veloland_net <span class="ot">&lt;-</span> <span class="fu">as_sfnetwork</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  veloland,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span> <span class="co"># -&gt; undirected</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking at the result</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>veloland_net</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A sfnetwork with 1416 nodes and 2066 edges
+#
+# CRS:  CH1903+ / LV95 
+#
+# An undirected multigraph with 1 component with spatially explicit edges
+#
+# Node data: 1,416 × 1 (active)
+               geom
+        &lt;POINT [m]&gt;
+1 (2627081 1223967)
+2 (2627046 1223984)
+3 (2622120 1259428)
+4 (2622077 1259420)
+5 (2664742 1215321)
+6 (2664729 1215323)
+# ℹ 1,410 more rows
+#
+# Edge data: 2,066 × 4
+   from    to length                                                        geom
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;                                            &lt;LINESTRING [m]&gt;
+1     1     2   39.1 (2627081 1223967, 2627073 1223970, 2627062 1223975, 262705…
+2     3     4   44.1 (2622120 1259428, 2622113 1259426, 2622110 1259425, 262210…
+3     5     6   15.0 (2664742 1215321, 2664742 1215322, 2664741 1215322, 266474…
+# ℹ 2,063 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-different-measures-of-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-different-measures-of-centrality">Calculating different measures of centrality</h3>
+<p>Here, I computed three different centrality measures: degree, betweenness, and closeness. These metrics describe different aspects of how important or central each node is within the network. I used edge length as a weight so that longer or shorter routes influence the calculation of shortest paths and connectivity.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>veloland_net <span class="ot">&lt;-</span> veloland_net <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">degree_centrality =</span> <span class="fu">centrality_degree</span>(<span class="at">weights =</span> length),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">betweenness_centrality =</span> <span class="fu">centrality_betweenness</span>(<span class="at">weights =</span> length),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">closeness_centrality =</span> <span class="fu">centrality_closeness</span>(<span class="at">weights =</span> length)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="converting-back-to-sf-objects" class="level3">
+<h3 class="anchored" data-anchor-id="converting-back-to-sf-objects">Converting back to <code>sf</code> objects</h3>
+<p>After calculating the network measures, I converted the network back into standard sf objects for both nodes and edges.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nodes_sf <span class="ot">&lt;-</span> veloland_net <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>edges_sf <span class="ot">&lt;-</span> veloland_net <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="assign-the-values-to-the-edges" class="level3">
+<h3 class="anchored" data-anchor-id="assign-the-values-to-the-edges">Assign the values to the edges</h3>
+<p>In this final preparation step, I aggregated node-level values back onto the edges by taking the mean. This makes it so that each edge has the centrality information derived from its connected nodes. It allows the final visualisation to show centrality directly on the cycling network lines.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>edges_sf <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(nodes_sf, edges_sf,  <span class="at">FUN =</span> mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="plot-the-maps" class="level3">
+<h3 class="anchored" data-anchor-id="plot-the-maps">Plot the maps</h3>
+<p>At the beginning, I first visualised all three centrality measures in their raw form to get a basic sense of how they behave across the network. This already made it clear that the measures were not directly comparable, because each one had a very different scale and distribution. Some values were extremely concentrated near zero, while a few edges had much higher values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> betweenness_centrality), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> closeness_centrality), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> degree_centrality), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20raw-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20raw-2.png" class="img-fluid" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20raw-3.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</div>
+<p>My first attempt to improve the visualisation was to transform the data using log scaling and also to try quantiles. The idea was to reduce skewness and make the maps easier to read. However, it quickly became clear that these transformations were changing the interpretation too much and were not solving the underlying issue of comparability between the measures.</p>
+<p>To make a more informed decision, I then looked at the actual distributions of each variable. This step was important because it gave me a clearer understanding of how each centrality measure is structured. It showed that betweenness and degree were heavily skewed, while closeness had a more balanced distribution. This helped me realise that any transformation would affect each measure differently and could unintentionally distort the comparison.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(edges_sf<span class="sc">$</span>betweenness_centrality, <span class="at">main =</span> <span class="st">"Betweenness"</span>, <span class="at">col =</span> <span class="st">"grey"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(edges_sf<span class="sc">$</span>closeness_centrality, <span class="at">main =</span> <span class="st">"Closeness"</span>, <span class="at">col =</span> <span class="st">"grey"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(edges_sf<span class="sc">$</span>degree_centrality, <span class="at">main =</span> <span class="st">"Degree"</span>, <span class="at">col =</span> <span class="st">"grey"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot%20distributions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In the end, I decided to use z-scores with a common color scale to compare the three centrality measures. The main reason was that betweenness, closeness, and degree are on completely different scales and have very different distributions, so comparing raw values or even min–max scaled values would have been misleading.</p>
+<p>By standardising each measure using z-scores, I could express everything in the same way: how far each value is above or below its own average in terms of standard deviations. This made it possible to compare patterns across the network without mixing up the meaning of the original units.</p>
+<p>Using a shared continuous color scale on the z-scores then allowed me to visually compare the three maps directly. Even though the measures describe different aspects of the network, this approach makes it easier to see where they agree or differ spatially, for example, whether the same corridors stand out across all measures or whether certain areas are only important under one definition of centrality.</p>
+<p>Overall, this approach felt like the most consistent way to compare the measures fairly while still preserving their individual structure.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>btw_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>betweenness_centrality)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>clo_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>closeness_centrality)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>deg_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>degree_centrality)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> btw_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> clo_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> deg_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20z-scores-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20z-scores-2.png" class="img-fluid" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="index_files/figure-html/plot%20z-scores-3.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-of-results" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-results">Discussion of results</h3>
+<p><strong>Betweenness</strong></p>
+<p>The betweenness centrality results highlight the main “through-routes” in the Swiss cycling network, meaning the corridors that are most frequently used as connectors between different parts of the network.</p>
+<p>The strongest pattern is a clear central corridor along the Aare–Limmat valley between Bern and Zurich. This stands out as the most important structural spine of the network, indicating that many shortest paths between other regions pass through this axis. From this main corridor, several secondary high-betweenness routes extend outward. These include connections from Bern towards Lausanne and Geneva, and from Zurich towards St.&nbsp;Gallen. These routes likely act as important links between major urban regions in the west and east of Switzerland. Making also sense if you look at population density in this corridor, because roughly a third of the Swiss populationlives <a href="https://www.nzz.ch/folio/drittel-der-schweiz-lebt-entlang-dieser-bahnlinie-ld.1827747">here</a>.</p>
+<p>A very strong north–south structure is also visible. The most prominent route runs from Zurich through central Switzerland (Zug and Lucerne) towards Ticino via the Gotthard axis. Additional alpine crossings, such as Bern–Thun–Interlaken–Grimsel and the Walensee–Rheintal–San Bernardino route, also show high betweenness values. This reflects the role of alpine passes as natural bottlenecks where long-distance routes are concentrated.</p>
+<p>Overall, betweenness centrality identifies a small number of key transit corridors that structure movement through the entire network. These are mainly major intercity routes and alpine crossings, which function as “backbones” of connectivity in the Swiss cycling system.</p>
+<p><strong>Closeness</strong></p>
+<p>The closeness centrality results show a strong concentration of accessibility in the Swiss plateau, with the highest values forming a broad central zone between Zurich and Bern. This area functions as the main accessibility core of the network, meaning that from here, most other locations can be reached in relatively few steps. This high-accessibility zone extends southwards along the Prealps, following the main settlement and transport corridors. Moving away from this core, closeness values steadily decrease, especially towards alpine regions and outer valleys.</p>
+<p>This spatial pattern also points to a structural imbalance in accessibility. Peripheral regions such as Swiss Romandy, Valais, Ticino, and Graubünden tend to have lower closeness centrality, reflecting their relative distance from the network’s centre and the fact that they are connected through fewer efficient routes. In practical terms, this means longer average travel distances within the network and weaker integration into the overall system.</p>
+<p>Beyond the purely spatial interpretation, this also hints at broader socio-economic implications. Areas with lower network accessibility are often less well connected to major population and economic centres, which can influence mobility opportunities, tourism flows, and regional development. While this structure is strongly shaped by geography, especially the Alpine terrain, it can still reinforce existing centre–periphery dynamics within Switzerland. More centrally located regions benefit from higher accessibility and connectivity, whereas peripheral regions may face structural disadvantages in terms of integration into national mobility networks.</p>
+<p>Overall, closeness centrality highlights not only the geographic centre of the network, but also how accessibility differences across Switzerland may translate into broader spatial inequalities.</p>
+<p><strong>Degree</strong></p>
+<p>The degree centrality results appear somewhat counterintuitive at first, as higher values are observed in more peripheral alpine regions, while urban areas such as cities show comparatively lower values.</p>
+<p>One possible explanation for this pattern is that it may be influenced by how the original spatial data is segmented into network elements rather than purely reflecting real-world connectivity. In densely built urban areas, the network is often represented by many short and highly subdivided segments. This can create long chains of intermediate nodes where each node only connects to two edges, which would result in relatively low degree values despite the high overall density of the network.</p>
+<p>In contrast, alpine regions are typically represented by fewer and longer segments, with more distinct junction points where multiple routes meet. These nodes may therefore show higher degree values, even though the overall network is less dense.</p>
+<p>I cannot be fully certain that this is the exact cause, but it seems like a plausible explanation for the pattern observed. If this is the case, then degree centrality in this representation would not reflect true intersection density, but instead how the network is geometrically represented and segmented.</p>
+<p>Overall, this suggests that degree centrality should be interpreted with some caution in this dataset, as the observed values may partly reflect data structure effects in addition to actual network connectivity.</p>
+</section>
+</section>
+<section id="routing" class="level2">
+<h2 class="anchored" data-anchor-id="routing">Routing</h2>
+<p>In this task, I will do my own routing using the Veloland dataset from the previous task.</p>
+<section id="prepare-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-the-data">Prepare the data</h3>
+<p>In this first step, I load the location data from a GeoPackage file into R using st_read(). This gives me a spatial dataset of all relevant places that I will use as start and end points for the routing analysis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the file path</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gpkg_path_locs <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">Sys.getenv</span>(<span class="st">"GEODATA"</span>), <span class="st">"locations.gpkg"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>locations <span class="ot">&lt;-</span> <span class="fu">st_read</span>(gpkg_path_locs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `locations' from data source 
+  `/home/rhoumyas/data/geodata/locations.gpkg' using driver `GPKG'
+Simple feature collection with 8 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2499995 ymin: 1076852 xmax: 2837794 ymax: 1267861
+Projected CRS: CH1903+ / LV95</code></pre>
+</div>
+</div>
+</section>
+<section id="defining-origin-and-destinations" class="level3">
+<h3 class="anchored" data-anchor-id="defining-origin-and-destinations">Defining origin and destinations</h3>
+<p>From this set, I define one specific location (Chiasso) as the origin, and all other locations as destinations.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>origin <span class="ot">&lt;-</span> locations <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Ortschaft <span class="sc">==</span> <span class="st">"Chiasso"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>destination <span class="ot">&lt;-</span> locations <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Ortschaft <span class="sc">!=</span> <span class="st">"Chiasso"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="computing-the-shortest-paths" class="level3">
+<h3 class="anchored" data-anchor-id="computing-the-shortest-paths">Computing the shortest paths</h3>
+<p>Here, I calculate the shortest paths from the origin (Chiasso) to all destination points using <code>st_network_paths()</code>. I use the network structure created earlier (Task 1) and define the edge length as the weight, so the algorithm finds the shortest distance-based routes through the cycling network. The output gives me a list of edges for each origin–destination pair.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>paths <span class="ot">&lt;-</span> <span class="fu">st_network_paths</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  veloland_net,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> origin,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> destination,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> veloland_net<span class="sc">$</span>length</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="build-edge-path-structure" class="level3">
+<h3 class="anchored" data-anchor-id="build-edge-path-structure">Build edge-path structure</h3>
+<p>In this step, I reorganise the raw output of the shortest path function into a structured format. I create a table that links each destination to the specific network edges used in its shortest path. Then I join this information back to the spatial edge data so that each edge knows which destination it belongs to. This allows me to visualise each route separately instead of merging everything into one combined result.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>path_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dest_id =</span> <span class="fu">rep</span>(<span class="fu">seq_along</span>(paths<span class="sc">$</span>edge_paths), <span class="fu">lengths</span>(paths<span class="sc">$</span>edge_paths)),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge_id =</span> <span class="fu">unlist</span>(paths<span class="sc">$</span>edge_paths)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>edges <span class="ot">&lt;-</span> veloland_net <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">edge_id =</span> <span class="fu">row_number</span>())</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>edges_paths <span class="ot">&lt;-</span> path_df <span class="sc">%&gt;%</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(edges, <span class="at">by =</span> <span class="st">"edge_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualise-routing-results" class="level3">
+<h3 class="anchored" data-anchor-id="visualise-routing-results">Visualise routing results</h3>
+<p>Finally, I visualise the full network together with the computed shortest paths. The grey lines represent the full cycling network, while the coloured lines show the shortest paths from Chiasso to each destination, with different colours for each target location. I also plot the origin in red and the destination points in black, and I add labels for all locations to make the map easier to interpret. The origin is additionally highlighted as “Start” to clearly indicate the reference point.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> edges, <span class="at">color =</span> <span class="st">"grey85"</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> edges_paths,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(dest_id)),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.6</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> origin, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> destination, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>   <span class="co"># labels</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> locations,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> Ortschaft),</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">check_overlap =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">4500</span>,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="dv">3000</span>,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> origin,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="st">"Start"</span>),</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">'red'</span>,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">check_overlap =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">+</span><span class="dv">4500</span>,</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="dv">3000</span>,</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>At the beginning of this project, I honestly thought it would be a fairly straightforward network analysis task. But I quickly ran into problems that didn’t feel like normal coding errors, the results just didn’t match what I expected or what the example solution showed.</p>
+<p>Most of my time went into trying to understand why my network looked different. I checked the data, tested different layers, fixed geometry issues, and tried different ways of building the graph. At some point, I was convinced I must be doing something fundamentally wrong. What made it especially confusing was that the map looked visually connected, but the network analysis still behaved as if parts were disconnected.</p>
+<p>Over time, I realised that the real issue wasn’t a single mistake, but how sensitive network analysis is to small details in the data. Things like tiny gaps between line segments or how intersections are handled completely change the structure of the graph. That directly affected measures like closeness and betweenness, and explained why parts of my results didn’t match the example.</p>
+<p>When I eventually found the preprocessed dataset from Moodle, it all suddenly made sense. The differences weren’t because I didn’t understand the methods, but because I had been working with a more raw version of the data, while the solution was based on a cleaned and prepared network.</p>
+<p>Even though it was frustrating at times, I actually learned a lot from struggling through it. I now understand much better how much effort goes into preparing spatial networks before any analysis even starts. In the end, this task gave me a much deeper understanding of how network analysis really works in practice, especially how important data preparation is for getting meaningful results.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
