@@ -273,8 +273,8 @@ Projected CRS: CH1903+ / LV95</code></pre>
 </div>
 </div>
 </div>
-<p>My first attempt to improve the visualisation was to transform the data using log scaling and also to try quantiles. The idea was to reduce skewness and make the maps easier to read. However, it quickly became clear that these transformations were changing the interpretation too much and were not solving the underlying issue of comparability between the measures.</p>
-<p>To make a more informed decision, I then looked at the actual distributions of each variable. This step was important because it gave me a clearer understanding of how each centrality measure is structured. It showed that betweenness and degree were heavily skewed, while closeness had a more balanced distribution. This helped me realise that any transformation would affect each measure differently and could unintentionally distort the comparison.</p>
+<p>My first attempt to improve the visualisation was to transform the data using log scaling and quantiles, with the goal of reducing skewness and making the maps easier to interpret. However, these transformations did not fully solve the main issue and, in some cases, changed the interpretation too much.</p>
+<p>To better understand the problem, I then looked at the distributions of the three centrality measures. This showed clear differences: betweenness and degree are strongly skewed, while closeness is more evenly distributed. This made it clear that applying the same transformation to all measures would affect them differently and could distort the comparison.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -290,44 +290,47 @@ Projected CRS: CH1903+ / LV95</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>In the end, I decided to use z-scores with a common color scale to compare the three centrality measures. The main reason was that betweenness, closeness, and degree are on completely different scales and have very different distributions, so comparing raw values or even min–max scaled values would have been misleading.</p>
-<p>By standardising each measure using z-scores, I could express everything in the same way: how far each value is above or below its own average in terms of standard deviations. This made it possible to compare patterns across the network without mixing up the meaning of the original units.</p>
-<p>Using a shared continuous color scale on the z-scores then allowed me to visually compare the three maps directly. Even though the measures describe different aspects of the network, this approach makes it easier to see where they agree or differ spatially, for example, whether the same corridors stand out across all measures or whether certain areas are only important under one definition of centrality.</p>
-<p>Overall, this approach felt like the most consistent way to compare the measures fairly while still preserving their individual structure.</p>
+<p>Instead, I decided to use a rank-based approach by converting each measure into percent ranks. This transforms all values onto a common scale between 0 and 1, where each value represents its relative position within its own distribution. In other words, it shows whether a segment belongs to the lowest, middle, or highest values of a given measure.</p>
+<p>Using this approach makes the three centrality measures directly comparable without altering their internal structure too much. A shared continuous colour scale can then be applied consistently, allowing for a clear visual comparison across the maps.</p>
+<p>Overall, this approach provides a simple and robust way to compare the measures, as it avoids issues related to skewness and differing value ranges while still preserving the relative importance of each segment within its respective distribution.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>btw_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>betweenness_centrality)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>clo_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>closeness_centrality)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>edges_sf<span class="sc">$</span>deg_z <span class="ot">&lt;-</span> <span class="fu">scale</span>(edges_sf<span class="sc">$</span>degree_centrality)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the ranks</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>edges_sf <span class="ot">&lt;-</span> edges_sf <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">deg_rank =</span> <span class="fu">percent_rank</span>(degree_centrality),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bet_rank =</span> <span class="fu">percent_rank</span>(betweenness_centrality),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">clo_rank =</span> <span class="fu">percent_rank</span>(closeness_centrality)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> btw_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> bet_rank), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span>  </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()  <span class="sc">+</span> </span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> clo_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> clo_rank), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(edges_sf) <span class="sc">+</span> </span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> deg_z), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> deg_rank), <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span> </span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-fig-nrow="3" data-layout-ncol="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img src="index_files/figure-html/plot%20z-scores-1.png" class="img-fluid" width="1152"></p>
+<p><img src="index_files/figure-html/plot%20quantiless-1.png" class="img-fluid" width="1152"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img src="index_files/figure-html/plot%20z-scores-2.png" class="img-fluid" width="1152"></p>
+<p><img src="index_files/figure-html/plot%20quantiless-2.png" class="img-fluid" width="1152"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img src="index_files/figure-html/plot%20z-scores-3.png" class="img-fluid" width="1152"></p>
+<p><img src="index_files/figure-html/plot%20quantiless-3.png" class="img-fluid" width="1152"></p>
 </div>
 </div>
 </div>
@@ -336,8 +339,8 @@ Projected CRS: CH1903+ / LV95</code></pre>
 <h3 class="anchored" data-anchor-id="discussion-of-results">Discussion of results</h3>
 <p><strong>Betweenness</strong></p>
 <p>The betweenness centrality results highlight the main “through-routes” in the Swiss cycling network, meaning the corridors that are most frequently used as connectors between different parts of the network.</p>
-<p>The strongest pattern is a clear central corridor along the Aare–Limmat valley between Bern and Zurich. This stands out as the most important structural spine of the network, indicating that many shortest paths between other regions pass through this axis. From this main corridor, several secondary high-betweenness routes extend outward. These include connections from Bern towards Lausanne and Geneva, and from Zurich towards St.&nbsp;Gallen. These routes likely act as important links between major urban regions in the west and east of Switzerland. Making also sense if you look at population density in this corridor, because roughly a third of the Swiss populationlives <a href="https://www.nzz.ch/folio/drittel-der-schweiz-lebt-entlang-dieser-bahnlinie-ld.1827747">here</a>.</p>
-<p>A very strong north–south structure is also visible. The most prominent route runs from Zurich through central Switzerland (Zug and Lucerne) towards Ticino via the Gotthard axis. Additional alpine crossings, such as Bern–Thun–Interlaken–Grimsel and the Walensee–Rheintal–San Bernardino route, also show high betweenness values. This reflects the role of alpine passes as natural bottlenecks where long-distance routes are concentrated.</p>
+<p>The strongest pattern is a clear central corridor along the Aare–Limmat valley between Bern and Zurich. This stands out as the most important structural spine of the network, indicating that many shortest paths between other regions pass through this axis. From this main corridor, several secondary high-betweenness routes extend outward. These include connections from Bern towards Lausanne and Geneva, and from Zurich towards St.&nbsp;Gallen. These routes likely act as important links between major urban regions in the west and east of Switzerland. Making also sense if you look at population density in this corridor, because roughly a third of the Swiss populationlives <a href="https://www.nzz.ch/folio/drittel-der-schweiz-lebt-entlang-dieser-bahnlinie-ld.1827747">here</a>. Other east-west connections worth mentioning are the Arth-Goldau-Luzern-Emmental-Bern and the Chur-Oberalp-Furka-Rhonetal axes.</p>
+<p>A very strong north–south structure is also visible. The most prominent route runs from Zurich through central Switzerland (Zug and Lucerne) towards Ticino via the Gotthard axis. Additional alpine crossings, such as Bern–Thun–Interlaken–Grimsel and the Walensee–Rheintal–Oberalp route, also show high betweenness values. This reflects the role of alpine passes as natural bottlenecks where long-distance routes are concentrated.</p>
 <p>Overall, betweenness centrality identifies a small number of key transit corridors that structure movement through the entire network. These are mainly major intercity routes and alpine crossings, which function as “backbones” of connectivity in the Swiss cycling system.</p>
 <p><strong>Closeness</strong></p>
 <p>The closeness centrality results show a strong concentration of accessibility in the Swiss plateau, with the highest values forming a broad central zone between Zurich and Bern. This area functions as the main accessibility core of the network, meaning that from here, most other locations can be reached in relatively few steps. This high-accessibility zone extends southwards along the Prealps, following the main settlement and transport corridors. Moving away from this core, closeness values steadily decrease, especially towards alpine regions and outer valleys.</p>
@@ -350,6 +353,10 @@ Projected CRS: CH1903+ / LV95</code></pre>
 <p>In contrast, alpine regions are typically represented by fewer and longer segments, with more distinct junction points where multiple routes meet. These nodes may therefore show higher degree values, even though the overall network is less dense.</p>
 <p>I cannot be fully certain that this is the exact cause, but it seems like a plausible explanation for the pattern observed. If this is the case, then degree centrality in this representation would not reflect true intersection density, but instead how the network is geometrically represented and segmented.</p>
 <p>Overall, this suggests that degree centrality should be interpreted with some caution in this dataset, as the observed values may partly reflect data structure effects in addition to actual network connectivity.</p>
+<p><strong>Comparison</strong></p>
+<p>Comparing the three measures shows that they capture different aspects of the network. Betweenness highlights a small number of key transit corridors, such as the Aare–Limmat axis and major alpine crossings, which structure movement across Switzerland. Closeness, in contrast, emphasizes a broader central zone in the Swiss plateau where overall accessibility is highest.</p>
+<p>Degree centrality shows a different pattern and appears to be influenced by how the network is segmented, reflecting more local structural properties rather than global importance.</p>
+<p>Overall, betweenness and closeness provide a good picture of the main corridors and central accessibility, while degree adds a local perspective but should be interpreted with caution.</p>
 </section>
 </section>
 <section id="routing" class="level2">
